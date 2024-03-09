@@ -1,0 +1,16 @@
+{
+  "name": "resources-microservice",
+  "version": "1.0.0",
+  "main": "resource-server.js",
+  "scripts": {
+    "start": "nodemon resource-server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "mongoose": "^8.2.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  }
+}
