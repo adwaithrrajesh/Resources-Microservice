@@ -19,5 +19,16 @@ module.exports={
         } catch (error) {
             return res.status(500).json({message:"Internal Server Error From Resource Microservice"})
         }
+    },
+    getArticleUsingId:async(req,res)=>{
+        try {
+            const {_id} = req.params
+            const article = await articleModel.findOne({_id:_id})
+            if(!article) return res.status(400).json({message:"Article Not found"})
+            return res.status(200).json({article})
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({message:"Internal Server Error"})
+        }
     }
 }
