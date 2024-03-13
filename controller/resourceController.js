@@ -30,5 +30,18 @@ module.exports={
             console.log(error)
             return res.status(500).json({message:"Internal Server Error"})
         }
+    },
+    updateArticle:async(req,res)=>{
+        try {
+            const article = req.body
+            const articleId = req.body._id
+            delete article._id
+            // Update Article Details
+            const updateArticle = await articleModel.findOneAndUpdate({_id:articleId},{$set:article},{new:true})
+            if(!updateArticle) return res.status(400).json({message:"Unable to update article"})
+            return res.status(200).json({updateArticle,message:"Article Updated Successfully"})
+        } catch (error) {
+            return res.status(500).json({message:"Internal Server Error"})
+        }
     }
 }
