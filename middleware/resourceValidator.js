@@ -13,10 +13,13 @@ module.exports = {
         next()
     },
     validateFAQ:(req,res,next)=>{
-        const {category,question,answer} = req.body
+        const {category,question,answer,secretKey} = req.body
         if(!category) return res.status(400).json({message:"No category Found"})
         if(!question) return res.status(400).json({message:"No Question Found"})
         if(!answer) return res.status(400).json({message:"No Answer Found"})
+        if(!secretKey) return res.status(400).json({message:"No Secret Key Found"})
+        const realSecretKey = process.env.SECRET_KEY
+        if(realSecretKey !== secretKey) return res.status(400).json({message:"Secret Key Doesnot Match"})
         next()
     }
 }
