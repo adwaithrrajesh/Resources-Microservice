@@ -15,7 +15,6 @@ module.exports={
     getAllArticle:async(req,res)=>{
         try {
             const allArticle = await articleModel.find()
-            if(allArticle.length<=0) return res.status(400).json({message:"No Article Found"})
             return res.status(200).json({allArticle})
         } catch (error) {
             return res.status(500).json({message:"Internal Server Error From Resource Microservice"})
