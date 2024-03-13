@@ -11,5 +11,12 @@ module.exports = {
         if(realSecretKey !== secretKey) return res.status(400).json({message:"Secret Key Doesnot Match"})
         delete req.body.secretKey
         next()
+    },
+    validateFAQ:(req,res,next)=>{
+        const {category,question,answer} = req.body
+        if(!category) return res.status(400).json({message:"No category Found"})
+        if(!question) return res.status(400).json({message:"No Question Found"})
+        if(!answer) return res.status(400).json({message:"No Answer Found"})
+        next()
     }
 }
