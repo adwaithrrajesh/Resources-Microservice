@@ -46,6 +46,20 @@ module.exports={
             return res.status(500).json({message:"Internal Server Error"})
         }
     },
+    deleteArticle:async(req,res)=>{
+        try {
+            const data = req.body
+            if(!data.secretKey) return res.status(400).json({message:"Secret Key is Missing"})
+            if(!data.articleId) return res.status(400).json({message:"Faq Id is not there"})
+            if(data.secretKey !== process.env.SECRET_KEY) return res.status(400).json({message:"Secret Key Doesnot match"})
+            // DELETE THE FAQ
+            const deleteArticle = await articleModel.deleteOne({_id:data.articleId})
+            if(!deleteArticle.deletedCount) return res.status(400).json({message:"Unable to delete the Article"})
+            return res.status(200).json({message:"Article Deleted Successfully"})
+        } catch (error) {
+            return res.status(500).json({message:"Internal server error"})
+        }
+    },
 
     // UPDATE FAQ
     insertFAQ: async(req,res)=>{
@@ -86,6 +100,20 @@ module.exports={
             const updateFaq = await FaqModel.findOneAndUpdate({_id:faqId},{$set:faq},{new:true})
             if(!updateFaq) return res.status(400).json({message:"Unable to update the faq"})
             return res.status(200).json({updateFaq,message:"FAQ updated successfully"})
+        } catch (error) {
+            return res.status(500).json({message:"Internal server error"})
+        }
+    },
+    deleteFaq:async(req,res)=>{
+        try {
+            const data = req.body
+            if(!data.secretKey) return res.status(400).json({message:"Secret Key is Missing"})
+            if(!data.faqId) return res.status(400).json({message:"Faq Id is not there"})
+            if(data.secretKey !== process.env.SECRET_KEY) return res.status(400).json({message:"Secret Key Doesnot match"})
+            // DELETE THE FAQ
+            const deleteFAQ = await FaqModel.deleteOne({_id:data.faqId})
+            if(!deleteFAQ.deletedCount) return res.status(400).json({message:"Unable to delete the FAQ"})
+            return res.status(200).json({message:"Faq Deleted Successfully"})
         } catch (error) {
             return res.status(500).json({message:"Internal server error"})
         }
