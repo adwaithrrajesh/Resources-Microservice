@@ -6,7 +6,7 @@ const {shortsValidator} = require('../middleware/shortsValidator')
 
 router.post('/insertShorts',shortsValidator,insertShorts)
 router.patch('/updateShorts',shortsValidator,updateShorts)
-router.delete('/deleteShorts',deleteShorts)
+router.post('/deleteShorts',deleteShorts)
 
 // Get 
 router.get('/getAllShorts',getAllShorts)
