@@ -27,7 +27,11 @@ module.exports = {
     },
     deleteShorts: async(req,res)=>{
         try {
-            const {shortId} = req.body
+            const {shortId,secretKey} = req.body
+            if(!shortId) return res.status(400).json({message:"Short Id not found"})
+            if(!secretKey) return res.status(400).json({message:"Secret key not found"})
+            if(secretKey !== process.env.SECRET_KEY) return res.status(400).json({message:"Secret key is not matching"})
+
             const deleteShort = await shortsModel.findOneAndDelete({_id:shortId})
             if(!deleteShort) return res.status(400).json({message:"Unable to delete the shorts"})
             return res.status(200).json({message:"Shorts deleted successfully"}) 
