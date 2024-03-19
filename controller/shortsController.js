@@ -27,7 +27,6 @@ module.exports = {
     },
     deleteShorts: async(req,res)=>{
         try {
-            console.log(req.body)
             const {shortId,secretKey} = req.body
             if(!shortId) return res.status(400).json({message:"Short Id not found"})
             if(!secretKey) return res.status(400).json({message:"Secret key not found"})
