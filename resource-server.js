@@ -5,6 +5,7 @@ const database = require('./database/config/config')
 
 // Configuring Routes
 const resourceRouter = require('./routes/resourceRouter')
+const shortsRouter = require('./routes/shortsRouter')
 
 // Configuring DotEnv
 const dotenv = require('dotenv')
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/resource',resourceRouter)
+app.use('/api/shorts',shortsRouter)
 
 
 
